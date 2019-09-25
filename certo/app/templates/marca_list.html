@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Listagem de Marcas
+{% endblock title %}
+
+{% block content %}
+
+<form method="get">
+  <div class="col-lg-12">
+    <div class="input-group">
+      <input type="text" class="form-control" name="busca" placeholder="Buscar marca">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Pesquisar</button>
+      </span>
+    </div>
+  </div>
+</form>
+<div class="col-lg-12">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Categoria</th>
+        <th>Produtos</th>
+        <th>Ação</th>
+        <th>produtos</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for marca in lista %}
+      <tr>
+        <td>{{ marca.nome }}</td>
+        <td>{{ marca.categoria }}</td>
+        <td>
+          <a href="{% url 'deletar_marca' pk=marca.pk %}">
+            <span class="glyphicon glyphicon-trash"></span>
+
+        </td>
+        <td></a>
+          <a href="{% url 'editar_marca' pk=marca.pk %}">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </a></td>
+        <td><a href="{% url 'listar_produto_marca' pk=marca.pk %}">
+            Ver produtos</a></td>
+        <!-- colocar editar e remover depois -->
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'criar_marca' %}">
+    <button type="submit" class="btn btn-primary">
+      Cadastrar
+    </button>
+  </a>
+</div>
+{% endblock content %}
